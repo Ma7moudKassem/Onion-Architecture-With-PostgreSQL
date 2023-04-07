@@ -1,4 +1,6 @@
-﻿namespace Domain;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+
+namespace Domain;
 
 public interface IBaseRepository<TEntity> where TEntity : BaseEntity
 {
@@ -14,4 +16,6 @@ public interface IBaseRepository<TEntity> where TEntity : BaseEntity
     Task RemoveAsync(Guid id);
     Task RemoveAsync(TEntity entity);
     Task RemoveBulkAsync(Expression<Func<TEntity, bool>> predicate);
+
+    Task<IDbContextTransaction> GetTransactionAsync();
 }
